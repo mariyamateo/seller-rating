@@ -1,15 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./app/*.{js,ts,jsx,tsx,mdx}",
-    "./components/*.{js,ts,jsx,tsx,mdx}",
-    "./pages/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    colors: {
-      buttonColor: "0040C1",
+    extend: {
+      minWidth: {
+        134: "538px",
+      },
     },
-    extend: {},
   },
   plugins: [],
 };

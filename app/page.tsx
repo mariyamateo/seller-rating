@@ -1,35 +1,24 @@
-"use client"
-import { createClient } from "@supabase/supabase-js";
-import { Auth } from "@supabase/auth-ui-react";
-import { ThemeSupa } from "@supabase/auth-ui-shared";
-import { useRouter } from "next/navigation";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+import Link from "next/link";
 
-const supabase = createClient(
-  "https://hbdmhlxvvpttebeegkzq.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhiZG1obHh2dnB0dGViZWVna3pxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTI3NDA4NzYsImV4cCI6MjAyODMxNjg3Nn0.PtsbLBnKOwDStOAklI1DnIZZdptUvQHEHfXRhetJBf8"
-);
+export default async function Home() {
+  const cookieStore = cookies();
+  const supabase = createServerComponentClient({ cookies: () => cookieStore });
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-export default function LoginPage() {
-  const router = useRouter();
-
-  supabase.auth.onAuthStateChange(async (event) => {
-    if (event !== "SIGNED_OUT") {
-      router.push("/rating");
-    } else {
-      router.push("/");
-    }
-  });
-
-  return (
-    <div>
-      <div>
-        <Auth
-          supabaseClient={supabase}
-          appearance={{ theme: ThemeSupa }}
-          theme="dark"
-          providers={["discord"]}
-        />
-      </div>
-    </div>
-  );
+  if (!user) {
+    return (
+      <main className="h-screen flex items-center justify-center p-6">
+        <Link
+          href={"/login"}
+          className="w-full p-3 rounded-md text-white bg-[#0040C1] focus:outline-none cursor-pointer"
+        >
+          Login
+        </Link>
+      </main>
+    );
+  }
 }
