@@ -67,8 +67,8 @@ export default function Login() {
 
   if (user) {
     return (
-      <div className="h-screen flex flex-col justify-center items-center">
-        <div className="flex flex-col justify-center items-center gap-14">
+      <div className="lg:h-screen flex flex-col justify-center items-center m-20 md:m-auto">
+        <div className="flex flex-col justify-center items-center gap-14 pt-40 pb-12 xl:p-0">
           <RatingPage />
           <button
             onClick={handleLogout}

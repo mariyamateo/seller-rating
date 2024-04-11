@@ -84,7 +84,7 @@ export default function RatingPage() {
   ];
 
   return (
-    <div className="flex flex-row items-center justify-center gap-8">
+    <div className="flex flex-col xl:flex-row items-center justify-center gap-8">
       <Box
         content={
           <>
