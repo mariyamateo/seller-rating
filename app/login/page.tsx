@@ -52,9 +52,9 @@ export default function Login() {
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
-    router.refresh();
     setUser(null);
     router.push("/");
+    router.refresh();
   };
 
   if (loading) {

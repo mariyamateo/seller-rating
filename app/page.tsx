@@ -20,5 +20,16 @@ export default async function Home() {
         </Link>
       </main>
     );
+  } else {
+    return (
+      <main className="h-screen flex items-center justify-center p-6">
+        <Link
+          href={"/login"}
+          className="w-full p-3 rounded-md text-white bg-[#0040C1] focus:outline-none cursor-pointer"
+        >
+          Return to Dashboard
+        </Link>
+      </main>
+    );
   }
 }
